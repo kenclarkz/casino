@@ -1,0 +1,14 @@
+{
+  "name": "the-liminal",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "THE LIMINAL — a first-person survival horror game. Ten floors. No exits. Only descent.",
+  "scripts": {
+    "test": "node tests/the-liminal/run.mjs",
+    "test:game": "node tests/the-liminal/run.mjs"
+  },
+  "devDependencies": {
+    "three": "0.160.1"
+  }
+}
