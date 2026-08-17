@@ -849,6 +849,8 @@ body {
 .tl-tbtn-attack { width: 68px; height: 68px; border-color: rgba(210, 90, 60, 0.6); font-size: 1.4rem; }
 .tl-tbtn-aim { border-color: rgba(150, 180, 200, 0.5); }
 .tl-tbtn-run { border-color: rgba(150, 200, 160, 0.5); }
+.tl-tbtn-swap { border-color: rgba(190, 170, 120, 0.5); }
+.tl-tbtn-pause { border-color: rgba(180, 180, 180, 0.5); font-size: 0.8rem; }
 
 /* right cluster */
 .tl-tbtn-attack,
@@ -860,6 +862,8 @@ body {
 .tl-tbtn-attack { right: 100px; bottom: 90px; }
 .tl-tbtn-aim { right: 20px; bottom: 110px; }
 .tl-tbtn-run { right: 26px; bottom: 34px; }
+.tl-tbtn-swap { right: 100px; bottom: 20px; }
+.tl-tbtn-pause { position: absolute; right: 16px; top: 16px; bottom: auto; }
 
 /* left cluster */
 .tl-tbtn-interact,
@@ -906,6 +910,14 @@ body {
     right: 22px;
     bottom: 30px;
   }
+  .tl-tbtn-swap {
+    right: 84px;
+    bottom: 20px;
+  }
+  .tl-tbtn-pause {
+    right: 12px;
+    top: 12px;
+  }
   .tl-tbtn-interact,
   .tl-tbtn-flash,
   .tl-tbtn-inv,
@@ -917,4 +929,33 @@ body {
   .tl-tbtn-inv { left: 168px; bottom: 70px; }
   .tl-tbtn-crouch { left: 118px; bottom: 70px; }
   .tl-tbtn-interact { left: 218px; bottom: 44px; }
+
+  /* Move HUD away from touch controls */
+  .tl-hud-bottom {
+    bottom: auto;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+  }
+  .tl-vitals {
+    width: 140px;
+    max-width: 38vw;
+    gap: 4px;
+  }
+  .tl-bar-track {
+    height: 5px;
+  }
+  .tl-bar-label {
+    width: 36px;
+    flex: 0 0 36px;
+    font-size: 0.42rem;
+  }
+  .tl-hud-center {
+    bottom: auto;
+    top: 50%;
+    width: 70vw;
+  }
+  .tl-ammo-wrap {
+    align-items: flex-end;
+  }
 }
