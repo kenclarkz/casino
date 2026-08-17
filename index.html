@@ -2,10 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
   <title>THE LIMINAL — Ten floors. No exits. Only descent.</title>
   <meta name="description" content="THE LIMINAL — a first-person survival horror game. Ten procedurally generated floors, loot and crafting, scarce guns, a three-phase boss. No exits. Only descent.">
   <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%23000'/><text x='8' y='12' font-size='12' fill='%23e9e2d2' text-anchor='middle'>⧈</text></svg>">
   <link rel="stylesheet" href="liminal.css">
   <script type="importmap">
@@ -16,6 +19,9 @@
       }
     }
   </script>
+  <style>
+    html, body { touch-action: none; overscroll-behavior: none; }
+  </style>
 </head>
 <body>
   <div id="mount" class="tl-page"></div>
