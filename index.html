@@ -2,33 +2,75 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-  <title>THE LIMINAL — Ten floors. No exits. Only descent.</title>
-  <meta name="description" content="THE LIMINAL — a first-person survival horror game. Ten procedurally generated floors, loot and crafting, scarce guns, a three-phase boss. No exits. Only descent.">
-  <meta name="theme-color" content="#000000">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="mobile-web-app-capable" content="yes">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%23000'/><text x='8' y='12' font-size='12' fill='%23e9e2d2' text-anchor='middle'>⧈</text></svg>">
-  <link rel="stylesheet" href="liminal.css">
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js",
-        "three/examples/jsm/": "https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/"
-      }
-    }
-  </script>
-  <style>
-    html, body { touch-action: none; overscroll-behavior: none; }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>THE BANKER — join the show</title>
+  <meta name="description" content="THE BANKER — a cinematic multiplayer game show. 2–8 players. 20 briefcases. $1,000,000. Deal or No Deal?">
+  <meta name="theme-color" content="#07050e">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%2307050e'/><text x='8' y='12' font-size='11' fill='%23f6c945' text-anchor='middle'>💰</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/banker.css">
 </head>
 <body>
-  <div id="mount" class="tl-page"></div>
+  <main class="landing">
+    <section class="landing-card">
+      <h1 class="logo landing-title">THE BANKER</h1>
+      <p class="landing-tag">20 cases &middot; $1 to $1,000,000 &middot; deal or no deal?</p>
+
+      <div class="field">
+        <label for="name">Your name</label>
+        <input id="name" maxlength="20" placeholder="Contestant" autocomplete="off">
+      </div>
+
+      <div class="field">
+        <label>Pick your avatar</label>
+        <div class="avatar-row" id="avatars"></div>
+      </div>
+
+      <div class="field">
+        <label for="code">Show code <span style="opacity:.5">(on the TV)</span></label>
+        <input id="code" class="code-input" maxlength="4" placeholder="ABCD" autocomplete="off">
+      </div>
+
+      <button class="btn btn-gold join-btn" id="join">TAKE A SEAT</button>
+
+      <nav class="landing-links">
+        <a class="btn btn-ghost" href="tv/">📺 I'm the TV</a>
+        <a class="btn btn-ghost" href="play/">🎮 I'm a player</a>
+      </nav>
+    </section>
+  </main>
+
   <script type="module">
-    import { Game } from './lib/the-liminal/game.js'
-    const mount = document.getElementById('mount')
-    new Game(mount)
+    const AVATARS = ['🎩','🦊','🐼','👑','🤠','🐙','🦖','🚀','🍀','⚡','💎','🎭']
+    const avRow = document.getElementById('avatars')
+    let avatar = AVATARS[Math.floor(Math.random() * AVATARS.length)]
+
+    for (const a of AVATARS) {
+      const b = document.createElement('button')
+      b.className = 'avatar-opt' + (a === avatar ? ' sel' : '')
+      b.textContent = a
+      b.addEventListener('click', () => {
+        avatar = a
+        avRow.querySelectorAll('.avatar-opt').forEach(x => x.classList.remove('sel'))
+        b.classList.add('sel')
+      })
+      avRow.appendChild(b)
+    }
+
+    // deep links like /#CODE prefill the code
+    if (location.hash) document.getElementById('code').value = location.hash.slice(1).toUpperCase()
+
+    document.getElementById('join').addEventListener('click', () => {
+      const name = document.getElementById('name').value.trim() || 'Contestant'
+      let code = document.getElementById('code').value.toUpperCase().replace(/[^A-Z0-9]/g, '')
+      if (code.length !== 4) { document.getElementById('code').focus(); return }
+      sessionStorage.setItem('banker-profile', JSON.stringify({ name, avatar }))
+      location.href = 'play/#' + code
+    })
+
+    document.getElementById('name').focus()
   </script>
 </body>
 </html>
