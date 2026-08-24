@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>THE BANKER — TV</title>
+  <meta name="theme-color" content="#07050e">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%2307050e'/><text x='8' y='12' font-size='11' fill='%23f6c945' text-anchor='middle'>💰</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/banker.css">
+</head>
+<body>
+  <div class="tv" id="tv">
+    <header class="tv-header">
+      <div class="logo tv-logo">THE BANKER</div>
+      <div class="room-chip" id="roomChip">····</div>
+      <div class="tv-round" id="roundInfo"></div>
+    </header>
+
+    <main class="tv-main" id="main"></main>
+
+    <footer class="rail" id="rail"></footer>
+  </div>
+
+  <!-- banker call -->
+  <div class="overlay" id="bankerOverlay">
+    <div class="banker-panel">
+      <div class="banker-ring">📞</div>
+      <div class="overlay-title">THE BANKER IS CALLING</div>
+      <div class="overlay-sub" id="bankerSub">private offers are landing on the phones</div>
+      <div class="offer-tally" id="offerTally"></div>
+      <div class="countdown-bar"><i id="offerBar" style="animation-duration:20s"></i></div>
+    </div>
+  </div>
+
+  <!-- twist -->
+  <div class="overlay twist-overlay" id="twistOverlay">
+    <div class="banker-panel">
+      <div class="banker-ring">⚡</div>
+      <div class="overlay-title" id="twistTitle">THE TWIST</div>
+      <div class="overlay-sub" id="twistSub">the banker is shuffling fates…</div>
+    </div>
+  </div>
+
+  <!-- results -->
+  <div class="overlay" id="endOverlay">
+    <div class="banker-panel" style="width:100%">
+      <div class="overlay-title" id="endTitle">THE FINAL REVEAL</div>
+      <div class="reveal-strip" id="revealStrip"></div>
+      <div class="podium" id="podium"></div>
+      <p class="overlay-sub" style="margin-top:3vh" id="endHint"></p>
+    </div>
+  </div>
+
+  <script src="../vendor/peerjs.min.js"></script>
+  <script src="../vendor/qrcode.js"></script>
+  <script type="module" src="../lib/the-banker/tv.js"></script>
+</body>
+</html>
