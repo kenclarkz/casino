@@ -38,6 +38,13 @@ body {
 button { font-family: inherit; cursor: pointer; border: 0; color: inherit; background: none; }
 input { font-family: inherit; }
 
+/* optional uploaded backdrop (assets/custom/phone-bg.*) */
+body.custom-phone-bg {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
 .logo {
   font-family: var(--font-show);
   letter-spacing: .06em;
