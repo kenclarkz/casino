@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "THE BANKER — an original 2-8 player cinematic game show. 20 briefcases. $1,000,000. Deal or No Deal?",
+  "description": "THE BANKER — an original cinematic game show for 1-8 players: solo, versus bots, or a full party. 20 briefcases. $1,000,000. Deal or No Deal?",
   "scripts": {
     "start": "node server.js",
     "test": "node tests/run.mjs"

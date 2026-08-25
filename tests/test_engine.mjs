@@ -12,7 +12,7 @@ import { makeTable, seat, pickAll, openUntilPhaseChange, answerAll, nextNow } fr
 // ---------------------------------------------------------------------------
 
 test('offer schedule: valid for every legal table size', () => {
-  for (let players = 2; players <= 8; players++) {
+  for (let players = 1; players <= 8; players++) {
     const communal = 20 - players
     const sched = buildSchedule(communal)
     assert(sched.length >= 3, `schedule too short for ${players} players`)
@@ -36,11 +36,13 @@ test('lobby: seats up to 8, rejects the 9th', () => {
   assert.throws(() => addPlayer(state, 'p9', 'Nine', '🎭', nextNow()), /full/i)
 })
 
-test('lobby: cannot start with fewer than 2', () => {
+test('lobby: solo shows are allowed; empty ones are not', () => {
   const state = createGame({ code: 'T', seed: 1, now: 0 })
-  addPlayer(state, 'solo', 'Solo', '🎩', nextNow())
-  assert.throws(() => startGame(state, nextNow()), /2 players/)
+  assert.throws(() => startGame(state, nextNow()), /contestant/i)
   assert.equal(state.phase, PHASES.LOBBY)
+  addPlayer(state, 'solo', 'Solo', '🎩', nextNow())
+  startGame(state, nextNow())
+  assert.equal(state.phase, PHASES.PICKING)
 })
 
 test('lobby: leaving removes you before the show', () => {
