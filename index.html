@@ -43,6 +43,11 @@
   </main>
 
   <script type="module">
+    import { applyCustomPhoneBg } from './lib/the-banker/custom-bg.js'
+    applyCustomPhoneBg()
+  </script>
+
+  <script type="module">
     const AVATARS = ['🎩','🦊','🐼','👑','🤠','🐙','🦖','🚀','🍀','⚡','💎','🎭']
     const avRow = document.getElementById('avatars')
     let avatar = AVATARS[Math.floor(Math.random() * AVATARS.length)]

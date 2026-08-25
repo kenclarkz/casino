@@ -96,6 +96,7 @@ index.html                 # / — join lobby
 tv/index.html              # /tv — the big screen
 play/index.html            # /play — phone controller
 assets/banker.css          # all styling
+assets/custom/             # drop a phone-bg.jpg here to skin the phone UI
 lib/the-banker/
   prizes.js                # the $1…$1,000,000 board
   rng.js                   # seeded mulberry32 (deterministic games)
