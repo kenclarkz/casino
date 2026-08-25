@@ -73,3 +73,50 @@ test('authority: bad actions come back as private errors, never crash the room',
   const p2states = outbox.get('p2').filter(m => m.t === 'state')
   assert(p2states.at(-1).cases.some(c => c.owner === 'p2'))
 })
+
+test('authority: only the tv seats bots; only bots can be unseated', () => {
+  const { auth, outbox } = rig()
+  auth.message('tv1', { t: 'hello', role: 'tv' })
+  auth.message('p1', { t: 'hello', role: 'player' })
+  auth.message('p1', { t: 'join', name: 'Ana', avatar: '🦊' })
+  auth.message('p1', { t: 'addBot' })
+  assert(outbox.get('p1').some(m => m.t === 'error' && /TV/.test(m.m)),
+    'players cannot seat bots')
+
+  auth.message('tv1', { t: 'addBot' })
+  let st = outbox.get('tv1').filter(m => m.t === 'state').at(-1)
+  assert.equal(st.players.length, 2, 'bot seated')
+  const bot = st.players.find(p => p.bot)
+  assert(bot, 'snapshot flags the bot')
+
+  auth.message('tv1', { t: 'kick', playerId: 'p1' }) // humans are protected
+  st = outbox.get('tv1').filter(m => m.t === 'state').at(-1)
+  assert.equal(st.players.length, 2, 'human stays seated')
+
+  auth.message('tv1', { t: 'kick', playerId: bot.id })
+  st = outbox.get('tv1').filter(m => m.t === 'state').at(-1)
+  assert.equal(st.players.length, 1, 'bot unseated')
+})
+
+test('authority: solo show — one player and a bot from lobby to gameover', () => {
+  const { auth, outbox } = rig()
+  auth.message('tv1', { t: 'hello', role: 'tv' })
+  auth.message('p1', { t: 'hello', role: 'player' })
+  auth.message('p1', { t: 'join', name: 'Ana', avatar: '🦊' })
+  auth.message('tv1', { t: 'addBot' })
+  auth.message('tv1', { t: 'start' })
+  auth.message('p1', { t: 'pickCase', caseId: 4 })
+  // bot auto-picks via its own clock; pump real wall-clock time through tick
+  let t = Date.now()
+  for (let i = 0; i < 20000 && auth.game.phase !== 'gameover'; i++) {
+    t += 250
+    auth.tickFor(t)
+    if (auth.game.phase === 'offer' && auth.game.offers.p1 && !auth.game.offers.p1.answered) {
+      auth.message('p1', { t: 'noDeal' })
+    } else if (auth.game.phase === 'twist' && auth.game.players.p1.twistPending &&
+               auth.game.players.p1.twistChoice == null) {
+      auth.message('p1', { t: 'twist', swap: false })
+    }
+  }
+  assert.equal(auth.game.phase, 'gameover')
+})

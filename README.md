@@ -2,8 +2,9 @@
 
 **20 briefcases. $1 to $1,000,000. One question: deal or no deal?**
 
-An original 2–8 player cinematic game show. The TV is the stage, the phones
-are the controllers, and the banker is always watching.
+An original cinematic game show for **1–8 players** — play solo, against
+house bots, or with a full party. The TV is the stage, the phones are the
+controllers, and the banker is always watching.
 
 > **Play it:** <https://kenclarkz.github.io/casino/>
 
@@ -17,13 +18,16 @@ are the controllers, and the banker is always watching.
 | The TV | `/tv` | Shared cinematic game screen — shows a QR code for players to join |
 | Controller | `/play` | Each phone is one contestant's private control panel |
 
-- **2–8 players** (minimum 2). Open `/tv`, it generates a show code and QR.
-  Everyone else scans or types the code at `/` and takes a seat.
+- **1–8 players.** Open `/tv`, it generates a show code and QR. Everyone else
+  scans or types the code at `/` and takes a seat — or hit **+ ADD A BOT** on
+  the TV to fill empty podiums (tap a bot chip to send it home). One contestant
+  alone is a complete show; bots deal and no-deal on their own judgment.
 - **WebSockets-style protocol, server-authoritative state.** Clients only ever
-  send *actions* (`openCase`, `deal`, `noDeal`, `twist`); all game rules,
-  validation and privacy filtering live in one authority module
+  send *actions* (`openCase`, `deal`, `noDeal`, `twist`, `addBot`); all game
+  rules, validation and privacy filtering live in one authority module
   (`lib/the-banker/engine.js` + `host.js`). Case values and offer amounts are
-  filtered per-viewer in snapshots — nobody can peek.
+  filtered per-viewer in snapshots — nobody can peek (bots included: they judge
+  offers from public info only).
 
 ## The game
 
@@ -82,7 +86,7 @@ The pure game core (RNG, prize board, full state machine, host routing) runs
 in Node with zero dependencies:
 
 ```bash
-npm test             # 30 tests: rules, offers, cash-outs, twist, timeouts, privacy
+npm test             # 42 tests: rules, offers, cash-outs, twist, bots, timeouts, privacy
 ```
 
 ## Structure
