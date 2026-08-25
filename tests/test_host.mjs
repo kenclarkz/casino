@@ -98,6 +98,20 @@ test('authority: only the tv seats bots; only bots can be unseated', () => {
   assert.equal(st.players.length, 1, 'bot unseated')
 })
 
+test('authority: starting an empty show reports the error back to the tv', () => {
+  const { auth, outbox } = rig()
+  auth.message('tv1', { t: 'hello', role: 'tv' })
+  auth.message('tv1', { t: 'start' })
+  const errs = outbox.get('tv1').filter(m => m.t === 'error')
+  assert(errs.length === 1 && /contestant/i.test(errs[0].m),
+    'empty-show start bounces a visible error to the tv')
+  // the show survives and starts once someone sits down
+  auth.message('p1', { t: 'hello', role: 'player' })
+  auth.message('p1', { t: 'join', name: 'Ana', avatar: '🦊' })
+  auth.message('tv1', { t: 'start' })
+  assert.equal(auth.game.phase, 'picking')
+})
+
 test('authority: solo show — one player and a bot from lobby to gameover', () => {
   const { auth, outbox } = rig()
   auth.message('tv1', { t: 'hello', role: 'tv' })
