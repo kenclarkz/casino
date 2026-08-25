@@ -55,8 +55,8 @@ count as NO DEAL, so the show can never stall.
 Premium game-show presentation: animated 3D case flips, live prize board,
 player podium rail with avatars/status (active vs CASHED OUT), banker call
 overlay, DEAL/NO DEAL tally + countdowns, dramatic glitch-out twist reveal,
-confetti finale, procedural WebAudio stings and crowd reactions — cheers for
-good pulls, "ohhh"s for bad ones (no audio files). 16:9-first,
+confetti finale, procedural WebAudio stings — bright arpeggios for
+good pulls, descending tones for bad ones (no audio files). 16:9-first,
 responsive down to phones.
 
 ## Networking
@@ -107,7 +107,7 @@ lib/the-banker/
   client.js                # shared client connection helper
   tv.js                    # TV renderer & P2P host wiring
   play.js                  # phone controller UI
-  audio.js                 # procedural WebAudio stings & crowd reactions
+  audio.js                 # procedural WebAudio stings
 server.js                  # optional zero-dep HTTP+WebSocket server
 vendor/                    # peerjs.min.js, qrcode.js (MIT)
 tests/                     # Node test suite
