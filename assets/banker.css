@@ -464,6 +464,13 @@ input { font-family: inherit; }
   font-weight: 700;
   animation: pillIn .4s both;
 }
+.lobby-player.is-bot {
+  border-style: dashed;
+  border-color: rgba(246,201,69,.55);
+  color: #ffe08a;
+}
+.lobby-player.is-bot[data-pid] { cursor: pointer; }
+.lobby-player.is-bot[data-pid]:hover { background: rgba(246,201,69,.14); }
 .start-row { margin-top: 3vh; display: flex; align-items: center; gap: 16px; }
 .min-note { color: var(--dim); font-size: 14px; }
 

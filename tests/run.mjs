@@ -6,6 +6,7 @@ const files = [
   './test_prizes.mjs',
   './test_rng.mjs',
   './test_engine.mjs',
+  './test_bots.mjs',
   './test_host.mjs',
 ]
 
